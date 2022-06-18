@@ -1,13 +1,15 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { validateRequest } from "../middleware/error";
+import {
+  validateRequest,
+  BadRequestError,
+  authRequired,
+} from "@mrticketing/common";
 import User from "../model/user";
 import jwt from "jsonwebtoken";
 import config from "../../config";
-import BadRequestError from "../error/badRequest";
 import Password from "../service/password";
 import "express-async-errors";
-import authRequired from "../middleware/authRequired";
 
 const router = express.Router();
 

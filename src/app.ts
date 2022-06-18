@@ -2,9 +2,8 @@ import express from "express";
 import { json } from "body-parser";
 import config from "../config";
 import userRouter from "./route/user";
-import errorHandler from "./middleware/error";
+import { errorHandler, currentUser } from "@mrticketing/common";
 import cookieSession from "cookie-session";
-import { currentUser } from "./middleware/currentUser";
 
 const app = express();
 
@@ -17,7 +16,7 @@ app.use(
 );
 
 app.use(json());
-app.use(currentUser);
+app.use(currentUser(config.jwtKey));
 app.use(userRouter);
 
 app.use(errorHandler);
